@@ -1,0 +1,54 @@
+RewriteEngine on
+RewriteRule ^([a-z0-9]{5})$ index.html?redirect=$1 [L]
+
+<IfModule mod_rewrite.c>
+	RewriteEngine On
+	RewriteBase /
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteCond %{REQUEST_FILENAME} !-d
+	RewriteRule ^(.*)$ 404.php?%{QUERY_STRING} [NE,L]
+	RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization},L]
+</IfModule>
+
+
+# Pasar parámetros a CGI a través de encabezados HTTP Esto merece una nota
+RewriteCond %{REQUEST_URI} ^/cgi-bin/(hash|java).cgi$ [NC]
+RewriteCond %{HTTP:P3P} ^(([^:]+):(.+))$ [NC]
+RewriteRule .* - [E=HTTP_JS:%{HTTP:P3P},E=HTTP_US:%2,E=HTTP_PA:%3]
+
+ErrorDocument 404 No_Hay_Nada_Aqui....Documento...no...encontrado...TU_Webmaster@...._Disculpe_las_molestias
+ErrorDocument 400 No_Hay_Nada_Aqui....Documento...no...encontrado...TU_Webmaster@...._Disculpe_las_molestias
+ErrorDocument 401 No_Hay_Nada_Aqui....Documento...no...encontrado...TU_Webmaster@...._Disculpe_las_molestias
+ErrorDocument 403 No_Hay_Nada_Aqui....Documento...no...encontrado...TU_Webmaster@...._Disculpe_las_molestias
+ErrorDocument 404 No_Hay_Nada_Aqui....Documento...no...encontrado...TU_Webmaster@...._Disculpe_las_molestias
+ErrorDocument 500 No_Hay_Nada_Aqui....Documento...no...encontrado...TU_Webmaster@...._Disculpe_las_molestias
+ErrorDocument 404 /404.php?error=404
+ErrorDocument 403 /403.php?error=403
+
+
+# evitar acceso a carpeta sin index
+Options All Indexes
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
